@@ -1,6 +1,7 @@
 # NewsLetter
 
 ## TODO:
-* Add server
-* Connect database
+* Add server -> Checked!
+* Connect database -> Checked
+* JavaScript control
 * Refactor
