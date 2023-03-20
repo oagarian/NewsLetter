@@ -9,6 +9,17 @@ import (
 	"context"
 )
 
+const getEmail = `-- name: GetEmail :one
+SELECT id, email FROM REGISTRED_USERS WHERE EMAIL LIKE(?)
+`
+
+func (q *Queries) GetEmail(ctx context.Context, email string) (RegistredUser, error) {
+	row := q.db.QueryRowContext(ctx, getEmail, email)
+	var i RegistredUser
+	err := row.Scan(&i.ID, &i.Email)
+	return i, err
+}
+
 const getLastID = `-- name: GetLastID :one
 SELECT ID FROM REGISTRED_USERS ORDER BY ID DESC LIMIT 1
 `
