@@ -7,7 +7,6 @@ import (
 	"log"
 	"modules/internal/db"
 	"strings"
-
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -20,6 +19,7 @@ func DatabaseConnect() *db.Queries{
 	dbconn, err := sql.Open("mysql", "root:password@tcp(localhost:3306)/NEWSLETTER")
 	if err != nil {
 		log.Fatal(err)
+		
 	}
 	database := db.New(dbconn);
 	return database;
@@ -27,14 +27,14 @@ func DatabaseConnect() *db.Queries{
 
 
 
-func GetLastID() int32 {
+func GetLastID() string {
 	database := DatabaseConnect();
 	ID, err := database.GetLastID(context.Background());
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
-
-	return ID;
+	value := fmt.Sprintf("%d", ID)
+	return value;
 }
 
 func AddNewUser(ID int32, email string) {
@@ -51,3 +51,4 @@ func AddNewUser(ID int32, email string) {
 	}
 	
 }
+

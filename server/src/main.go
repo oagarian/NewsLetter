@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"log"
-	"strconv"
 	"fmt"
 )
 
@@ -18,19 +18,19 @@ func registerUser(c *fiber.Ctx) error {
 }
 
 func lastID(c *fiber.Ctx) error {
-	value := fmt.Sprintf("%s", GetLastID)
-	valueToInt, err := strconv.Atoi(value);
-	if err != nil {
-		fmt.Println(err)
-	}
-	
-	c.Write([]byte(strconv.Itoa(valueToInt)))
+	c.Response().Header.Set("Content-Type", "application/json")
+	fmt.Println("Katchau")
+	c.Write([]byte(GetLastID()))
 	return nil;
 }
 
 
 func main() {
 	app := fiber.New()
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowHeaders:  "Origin, Content-Type, Accept",
+	}))
 	app.Post("/register", registerUser)
 	app.Get("/lastid", lastID)
 	app.Listen(":8080")
