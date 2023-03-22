@@ -1,9 +1,10 @@
 async function fetchAsync (URL) {
-  let response = await fetch(URL);
-  let data = await response.json();
-  return data;
+  fetch(URL)
+  .then((response) => response.json())
+  .then((json) => console(json))
 }
 
 document.getElementsByClassName("submit")[0].addEventListener('click', function (){
-    console.log(fetchAsync("http://localhost:8080/lastid"))
+    fetchAsync("http://localhost:8080/lastid")
+
 })
