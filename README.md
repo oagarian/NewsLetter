@@ -1,7 +1,9 @@
 # NewsLetter
 
-## TODO:
-* Add server -> Checked!
-* Connect database -> Checked
-* JavaScript control
-* Refactor
+## How to run the server:
+```ssh
+cd server/src
+
+go run ./
+```
+
