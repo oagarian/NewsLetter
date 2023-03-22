@@ -1,10 +1,13 @@
-async function fetchAsync (URL) {
-  fetch(URL)
-  .then((response) => response.json())
-  .then((json) => console(json))
+async function requestGET(URL) {
+  const response = await fetch(URL);
+  const data = await response.text();
+  const value = Object.values(data)[0];
+  return value
 }
 
-document.getElementsByClassName("submit")[0].addEventListener('click', function (){
-    fetchAsync("http://localhost:8080/lastid")
-
+const counter = document.getElementsByClassName("counter")[0]
+requestGET("http://localhost:8080/lastid").then((value) => {
+  counter.textContent = value;
 })
+
+
