@@ -46,7 +46,7 @@ func AddNewUser(ID int32, email string) {
 	if (strings.EqualFold(newUser.Email, email)) {
 		fmt.Println("A user with that email already exists")
 	} else {
-		database.InsertUser(context.Background(), db.InsertUserParams{ID, email});
+		database.InsertUser(context.Background(), db.InsertUserParams{ID: ID, Email: email});
 		fmt.Println("User registred")
 	}
 	

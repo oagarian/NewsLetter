@@ -14,15 +14,14 @@ func registerUser(c *fiber.Ctx) error {
 		log.Fatal(err)
 	}
 	AddNewUser(payload.ID, payload.Email)
-	return nil;
+	return c.SendStatus(c.Response().StatusCode())
 }
 
 func lastID(c *fiber.Ctx) error {
 	c.Response().Header.Set("Content-Type", "application/json")
 	fmt.Println("Katchau")
 	c.Write([]byte(GetLastID()))
-	return nil;
-}
+	return c.SendStatus(c.Response().StatusCode())}
 
 
 func main() {
